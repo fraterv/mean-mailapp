@@ -20,14 +20,15 @@ app.controller('MailsController', function ($scope, Mails) {
   });
 });
 
-app.controller('controllerMail', function ($scope, factoryMail) {
+app.controller('controllerMail', function ($scope,$http, factoryMail) {
   console.log("Wir sind im Controller");
-  // $scope.getFolders = factoryMail.getFolders();
-  $scope.getFolders = function () {
-    console.log("In DER function!");
-    factoryMail.getFolders().success(function (data) {
-      console.log("Data" + data);
-    });
-  };
-  console.log($scope.getFolders);
+  factoryMail.getFolders().success(function (data) {
+    $scope.folders = data;
+    console.log("controllerMail.factoryMail.getFolders() "+data[0]);
+    $scope.folders=data;
+    console.log(data);
+  }).error( function (data, status) {
+    console.log("error: " ,data, status);
+    $scope.folders = [];
+  });
 });
