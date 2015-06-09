@@ -22,6 +22,18 @@ app.controller('MailsController', function ($scope, Mails) {
 
 app.controller('controllerMail', function ($scope,$http, factoryMail) {
   console.log("Wir sind im Controller");
+  $scope.folders= '';
+  $scope.mails='';
+  $scope.selectedFolder = '';
+
+
+  $scope.selectFolder = function (folder) {
+    $scope.selectedFolder = folder;
+    factoryMail.getMailsFromFolder(folder).success(function (data) {
+      $scope.mails = data;
+    })
+  }
+
   factoryMail.getFolders().success(function (data) {
     $scope.folders = data;
     console.log("controllerMail.factoryMail.getFolders() "+data[0]);
@@ -31,4 +43,7 @@ app.controller('controllerMail', function ($scope,$http, factoryMail) {
     console.log("error: " ,data, status);
     $scope.folders = [];
   });
+
+
 });
+

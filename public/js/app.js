@@ -1,4 +1,4 @@
-var app = angular.module("mailApp", []);
+var app = angular.module("mailApp", ["ui.bootstrap"]);
 
 app.factory('Test', function($http){
 	return $http.get('/test');
@@ -15,7 +15,7 @@ app.factory('factoryMail', function($http) {
 			console.log("Wir sind in factoryMail.getFolders!");
 			return $http.get('/mailapi/folders');
 		},
-		selectFolder: function (folder) {
+		getMailsFromFolder: function (folder) {
 			return $http.get('http://localhost:3000/mailapi/shbyfolder/' + folder);
 		},
 		selectMail: function (mail) {
@@ -47,5 +47,6 @@ app.factory('factoryMail', function($http) {
 			console.log("create mail:" );
 			console.log(paras);
 			return $http.post('http://localhost:3000/mailapi/createmail', paras);
-		}	};
+		}
+	};
 });
