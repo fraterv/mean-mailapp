@@ -17,14 +17,36 @@
   <h1>Mail </h1>
   <br>
     <div ng-controller="controllerMail">
+        <div>{{debugOutput}}</div>
        <accordion close-others="true">
         <accordion-group is-open="status.close" ng-repeat="folder in folders">
             <div ng-click="selectFolder(folder)"></div>
             <accordion-heading ng-click="selectFolder(folder)"> {{folder}} </accordion-heading>
 
             <button class="btn btn-default btn-sm" ng-click="selectFolder(folder)">Show Mails</button>
-            <button class="btn btn-default btn-sm" ng-click="renameFolder(folder)">Rename Folder</button>
             <button class="btn btn-default btn-sm" ng-click="removeFolder(folder)">Remove Folder</button>
+
+            <div ng-controller="ModalDemoCtrl">
+                <script type="text/ng-template" id="myModalContent.html">
+                    <div class="modal-header">
+                        <h3 class="modal-title">Rename Folder</h3>
+                    </div>
+                    <div class="modal-body">
+                        <labe>New Folder Name</labe></labe><input type="text" ng-model="newFolderName"></input>
+                        <div><br> {{ newFolderName}}</br></div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-primary" ng-click="ok()">OK</button>
+                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                    </div>
+                </script>
+
+                <button class="btn btn-default" ng-click="open(folder)">rename Folder</button>
+
+                <div ng-show="newFolderName">New folder name: {{ newFolderName }}</div>
+            </div>
+
+
 
             <div ng-repeat="mail in mails">
                 <div> {{mail.sender}}  open move remove </div> <div> {{mail.subject}} </div> <div> {{mail.date}} </div>
