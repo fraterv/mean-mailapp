@@ -12,28 +12,34 @@ app.factory('factoryMail', function($http) {
 	console.log("Wir sind in der Factory");
 	return {
 		getFolders: function() {
-			console.log("Wir sind in factoryMail.getFolders!");
 			return $http.get('/mailapi/folders');
 		},
+		//Show mails by folder
 		selectFolder: function (folder) {
-			return $http.get('http://localhost:3000/mailapi/shbyfolder/' + folder);
+			return $http.get('mailapi/shbyfolder/' + folder);
 		},
+		//Show mail by _id
 		selectMail: function (mail) {
-			var url = 'http://localhost:3000/mailapi/show/' + mail._id;
+			var url = 'mailapi/show/' + mail._id;
 			return $http.get(url);
 		},
+		//Delete mail by _id
 		deleteMail: function (mail) {
-			return $http.delete('http://localhost:3000/mailapi/deletemail/' + mail._id);
+			return $http.delete('mailapi/deletemail/' + mail._id);
 		},
+		//Delete folder by foldername
 		deleteFolder: function (folder) {
-			return $http.delete('http://localhost:3000/mailapi/deletefolder/' + folder);
+			return $http.delete('/mailapi/deletefolder/' + folder);
 		},
+		//Rename folder by foldername
 		renameFolder: function (folder, newName) {
-			return $http.put('http://localhost:3000/mailapi/updfoldername/' + folder, {folder: newName});
+			return $http.put('/mailapi/updfoldername/' + folder, {folder: newName});
 		},
+		//Move folder by foldername
 		moveFolder: function (mail, newName) {
-			return $http.put('http://localhost:3000/mailapi/movemail/' + mail._id, {folder: newName});
+			return $http.put('/mailapi/movemail/' + mail._id, {folder: newName});
 		},
+		//Create new mail
 		newMail: function (mail) {
 			var recipients = mail.rec.split(';');
 			var paras = {
@@ -46,6 +52,6 @@ app.factory('factoryMail', function($http) {
 			};
 			console.log("create mail:" );
 			console.log(paras);
-			return $http.post('http://localhost:3000/mailapi/createmail', paras);
+			return $http.post('/mailapi/createmail', paras);
 		}	};
 });
