@@ -15,6 +15,35 @@
   <body ng-app="mailApp">
 
   <h1>Mail </h1>
+
+  <div ng-controller="ModalNewMailCtrl">
+      <script type="text/ng-template" id="newMail.html">
+          <div class="modal-header">
+              <h3 class="modal-title">New Mail</h3>
+          </div>
+          <div class="modal-body">
+              <div><label>Sender</label><input type="text" ng-model="jnewMail.sender"> </input></div>
+              <div><label>Recipient</label><input type="text" ng-model="jnewMail.recipients"></input></div>
+              <div><label>Subject</label><input type="text" ng-model="jnewMail.subject"></input></div>
+              <div><label>Date</label><input type="text" ng-model="jnewMail.date"> </input></div>
+              <div><label>Text</label><input type="text" ng-model="jnewMail.text"> </input></div>
+              <div>{{jnewMail.sender}}</div>
+              <div>{{jnewMail.recipients}}</div>
+              <div>{{jnewMail.subject}}</div>
+              <div>{{jnewMail.date}}</div>
+              <div>{{jnewMail.text}}</div>
+          </div>
+          <div class="modal-footer">
+              <button class="btn btn-primary" ng-click="ok()">OK</button>
+              <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+          </div>
+      </script>
+
+      <button class="btn btn-default" ng-click="open()">New Mail</button>
+
+  </div>
+
+  <br>
   <br>
     <div ng-controller="controllerMail">
         <div>{{debugOutput}}</div>
@@ -23,33 +52,37 @@
             <div ng-click="selectFolder(folder)"></div>
             <accordion-heading ng-click="selectFolder(folder)"> {{folder}} </accordion-heading>
 
+
             <button class="btn btn-default btn-sm" ng-click="selectFolder(folder)">Show Mails</button>
             <button class="btn btn-default btn-sm" ng-click="removeFolder(folder)">Remove Folder</button>
-
-            <div ng-controller="ModalDemoCtrl">
+            <div ng-controller="RenameModalCtrl">
                 <script type="text/ng-template" id="myModalContent.html">
-                    <div class="modal-header">
-                        <h3 class="modal-title">Rename Folder</h3>
-                    </div>
-                    <div class="modal-body">
-                        <labe>New Folder Name</labe></labe><input type="text" ng-model="newFolderName"></input>
-                        <div><br> {{ newFolderName}}</br></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-primary" ng-click="ok()">OK</button>
-                        <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
-                    </div>
+                  <div class="modal-header">
+                    <h3 class="modal-title">{{selectedFolder}}</h3>
+
+                  </div>
+                  <div class="modal-body">
+                    <input ng-model="newFolderName"></input>
+                    Selected: <b>{{selectedFolder}}</b>
+                  </div>
+                  <div class="modal-footer">
+                    <button class="btn btn-primary" ng-click="ok()">OK</button>
+                    <button class="btn btn-warning" ng-click="cancel()">Cancel</button>
+                  </div>
                 </script>
 
-                <button class="btn btn-default" ng-click="open(folder)">rename Folder</button>
-
-                <div ng-show="newFolderName">New folder name: {{ newFolderName }}</div>
+                <button class="btn btn-default btn-sm" ng-click="open()">Rename</button>
+                <div ng-show="outPut">Selection from a modal: {{ outPut }}</div>
             </div>
 
 
-
             <div ng-repeat="mail in mails">
-                <div> {{mail.sender}}  open move remove </div> <div> {{mail.subject}} </div> <div> {{mail.date}} </div>
+                <div> {{mail.sender}}
+                    <button class="btn btn-default btn-sm" ng-click="showMail(mail)">Show Mail</button>
+                    <button class="btn btn-default btn-sm" ng-click="removeMail(mail)">Remove Mail</button
+                    open move remove </div>
+                <div> {{mail.subject}} </div>
+                <div> {{mail.date}} </div>
             </div>
 
         </accordion-group>
@@ -57,8 +90,6 @@
 
 
     </div>
-    <div>{{selectedFolder}}</div>
-    <div>{{mails}}</div>
 
   <!-- Modules -->
   <script src="js/app.js"></script>

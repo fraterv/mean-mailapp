@@ -1,0 +1,16 @@
+{
+  "name": "mean-mailapp",
+  "version": "0.0.0",
+  "homepage": "https://github.com/fraterv/mean-mailapp",
+  "authors": [
+    "Rouven Dreimann <rdreimann@fh-bielefeld.de>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "public/bower_components",
+    "test",
+    "tests"
+  ]
+}
