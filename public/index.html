@@ -82,31 +82,13 @@
 
 
     <div class="container" ng-controller='MainController'>
-
-      <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
-        <h1>{{title}}</h1>
-
-        <div>
-          <tabset>
-            <tab heading="Static title">Static content</tab>
-            <tab ng-repeat="tab in tabs" heading="{{tab.title}}" active="tab.active" disable="tab.disabled">
-              {{tab.content}}
-            </tab>
-            <tab select="alertMe()">
-              <tab-heading>
-                <i class="glyphicon glyphicon-bell"></i> Alert!
-              </tab-heading>
-              I've got an HTML heading, and a select callback. Pretty cool!
-            </tab>
-          </tabset>
+        <div ng-controller="controllerAccordion">
+          <accordion close-others="oneAtATime">
+            <accordion-group ng-repeat="folder in folders" heading={{folder}}>
+              E-Mails von {{folder}}
+            </accordion-group>
+          </accordion>
         </div>
-
-
-
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
       </div>
 
     </div> <!-- /container -->

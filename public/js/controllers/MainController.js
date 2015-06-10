@@ -73,3 +73,33 @@ app.controller('controllerMailTabs', function($scope, $window){
     { title:'Dynamic Title 2', content:'Dynamic content 2', disabled: true }
   ];
 });
+
+app.controller('controllerAccordion', function($scope, $http, factoryMail) {
+
+  // $scope.groups = [
+  //   {
+  //     title: 'Dynamic Group Header - 1',
+  //     content: 'Dynamic Group Body - 1'
+  //   },
+  //   {
+  //     title: 'Dynamic Group Header - 2',
+  //     content: 'Dynamic Group Body - 2'
+  //   }
+  // ];
+
+  factoryMail.getFolders().success(function(data) {
+    $scope.folders = data;
+  });
+
+  $scope.items = ['Item 1', 'Item 2', 'Item 3'];
+ 
+  $scope.addItem = function() {
+    var newItemNo = $scope.items.length + 1;
+    $scope.items.push('Item ' + newItemNo);
+  };
+
+  $scope.status = {
+    isFirstOpen: true,
+    isFirstDisabled: false
+  };
+});

@@ -1,7 +1,6 @@
 var app = angular.module("mailApp", ['ui.bootstrap']);
 
 app.factory('factoryMail', function($http) {
-	console.log("Wir sind in der Factory");
 	return {
 		getFolders: function() {
 			return $http.get('/mailapi/folders');
