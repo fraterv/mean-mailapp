@@ -13,6 +13,10 @@ var users = require('./routes/users');
 var mailapi = require('./routes/mailapi');
 
 var app = express();
+// cors-middleware enables cross origin resource sharing
+var cors = require('cors');
+app.use(cors());
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
